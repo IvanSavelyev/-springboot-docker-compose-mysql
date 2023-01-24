@@ -22,4 +22,5 @@ services:
     volumes:
       - /data/app
     ports:
-      - "8080:8084"
+      - "5005:5005"
+      - "8084:8084"

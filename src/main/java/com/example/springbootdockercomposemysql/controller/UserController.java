@@ -2,6 +2,7 @@ package com.example.springbootdockercomposemysql.controller;
 
 import com.example.springbootdockercomposemysql.entity.User;
 import com.example.springbootdockercomposemysql.repository.UserRepository;
+import com.example.springbootdockercomposemysql.util.UserUtil;
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +31,7 @@ public class UserController {
 
   @GetMapping("/create")
   public List<User> users() {
-    User users = new User();
-    users.setId(1L);
-    users.setName("Sam");
-    users.setCountry("Development");
-    userRepository.save(users);
+    userRepository.saveAll(UserUtil.createUserGroup());
     return userRepository.findAll();
   }
 
