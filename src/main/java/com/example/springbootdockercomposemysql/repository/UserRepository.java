@@ -1,10 +1,8 @@
 package com.example.springbootdockercomposemysql.repository;
 
+import com.example.springbootdockercomposemysql.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.springbootdockercomposemysql.entity.User;
-
-public interface UserRepository extends JpaRepository<User, Long>
-{
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }

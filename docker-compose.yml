@@ -1,7 +1,6 @@
 version: '3'
-
 services:
-  mysql-standalone-container:
+  mysql:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=admin123
@@ -10,12 +9,17 @@ services:
       - MYSQL_PASSWORD=testuser@123
     volumes:
       - /data/mysql
-  springboot-docker-compose-mysql-app-container:
-    image: springboot-docker-compose-mysql-app:1
+    ports:
+      - "3306:3306"
+
+  application:
+    image: application:1
     build:
       context: ./
       dockerfile: Dockerfile
     depends_on:
-      - mysql-standalone-container
+      - mysql
     volumes:
-      - /data/springboot-docker-compose-mysql-app
+      - /data/app
+    ports:
+      - "8080:8084"
