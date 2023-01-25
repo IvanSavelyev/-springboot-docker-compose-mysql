@@ -1,0 +1,43 @@
+version: '3'
+services:
+  rdbms:
+    image: postgres:15.1-alpine
+#    build: ./rdbms
+#    command: postgres -c config_file=/postgresql.conf -c hba_file=/pg_hba.conf
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - "5432:5432"
+#    healthcheck:
+#      test: [ "CMD", "pg_isready" ]
+#      timeout: 5s
+##      start_period: 20s
+#      interval: 10s
+#      retries: 1
+
+#  rdbms:
+#    image: jxw3ng/alpine-mysql
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=admin123
+#      - MYSQL_DATABASE=test
+#      - MYSQL_USER=testuser
+#      - MYSQL_PASSWORD=testuser@123
+#    volumes:
+#      - /data/mysql
+#    ports:
+#      - "3306:3306"
+
+  application:
+    image: application:1
+    build:
+      context: ../..
+      dockerfile: ./tools/docker/application/Dockerfile
+    depends_on:
+      - rdbms
+    volumes:
+      - /data/app
+    ports:
+#      - "5005:5005"
+      - "8084:8084"
