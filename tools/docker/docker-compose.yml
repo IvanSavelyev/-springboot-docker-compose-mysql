@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mysql:
+    build:
+      dockerfile: rdbms/Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testuser@123
+    volumes:
+      - /data/mysql
+    ports:
+      - "3306:3306"
+
+  application:
+    image: application:1
+    build:
+      context: ../..
+      dockerfile: ./tools/docker/application/Dockerfile
+    depends_on:
+      - mysql
+    volumes:
+      - /data/app
+    ports:
+      - "8080:8084"
