@@ -1,17 +1,16 @@
 version: '3'
 services:
-  mysql:
+  postgres:
     build:
       dockerfile: rdbms/Dockerfile
     environment:
-      - MYSQL_ROOT_PASSWORD=admin123
-      - MYSQL_DATABASE=test
-      - MYSQL_USER=testuser
-      - MYSQL_PASSWORD=testuser@123
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test
     volumes:
-      - /data/mysql
+      - /data/postgres
     ports:
-      - "3306:3306"
+      - "5432:5432"
 
   application:
     image: application:1
@@ -19,8 +18,9 @@ services:
       context: ../..
       dockerfile: ./tools/docker/application/Dockerfile
     depends_on:
-      - mysql
+      - postgres
     volumes:
       - /data/app
     ports:
-      - "8080:8084"
+#      - "5005:5005"
+      - "8084:8084"

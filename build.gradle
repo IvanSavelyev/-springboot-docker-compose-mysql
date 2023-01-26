@@ -31,8 +31,9 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion"
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5-jakarta'
     implementation "org.jsoup:jsoup:$jsoupVersion"
-    implementation 'com.h2database:h2'
-    implementation 'mysql:mysql-connector-java'
+//    implementation 'com.h2database:h2'
+//    implementation 'mysql:mysql-connector-java'
+    runtimeOnly 'org.postgresql:postgresql'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
