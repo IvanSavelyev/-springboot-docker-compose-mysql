@@ -3,6 +3,7 @@ package com.example.springbootdockercomposemysql.controller;
 import com.example.springbootdockercomposemysql.entity.User;
 import com.example.springbootdockercomposemysql.repository.UserRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,13 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class UserController {
 
   private final UserRepository userRepository;
-
-  public UserController(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
 
   @PostMapping("/users")
   public User create(@RequestBody User user) {
@@ -30,7 +28,7 @@ public class UserController {
 
   @GetMapping("/create")
   public List<User> users() {
-    User users = new User();
+    var users = new User();
     users.setId(1L);
     users.setName("Sam");
     users.setCountry("Development");
@@ -45,7 +43,7 @@ public class UserController {
 
   @PutMapping("/users/{user_id}")
   public User update(@PathVariable("user_id") Long userId, @RequestBody User userObject) {
-    User user = userRepository.findById(userId).get();
+    var user = userRepository.findById(userId).get();
     user.setName(userObject.getName());
     user.setCountry(userObject.getCountry());
     return userRepository.save(user);

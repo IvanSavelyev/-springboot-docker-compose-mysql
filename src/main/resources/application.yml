@@ -1,0 +1,21 @@
+## Spring DATA SOURCE Configurations
+spring:
+  datasource:
+    url: jdbc:mysql://rdbms:3306/test?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf8
+    username: testuser
+    password: testuser@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # HikaryCP Properties
+    hikari.initialization-fail-timeout: 0
+
+  ## Hibernate Properties
+  # The SQL dialect makes Hibernate generate better SQL for the chosen database
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    # Hibernate ddl auto (create, create-drop, validate, update)
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+
+server:
+  port: 8084
