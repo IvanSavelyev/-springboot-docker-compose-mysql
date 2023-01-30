@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  rdbms:
     build:
       dockerfile: rdbms/Dockerfile
     environment:
@@ -11,6 +11,11 @@ services:
       - /data/postgres
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      timeout: 5s
+      interval: 10s
+      retries: 1
 
   application:
     image: application:1
@@ -18,7 +23,8 @@ services:
       context: ../..
       dockerfile: ./tools/docker/application/Dockerfile
     depends_on:
-      - postgres
+      rdbms:
+        condition: service_healthy
     volumes:
       - /data/app
     ports:
