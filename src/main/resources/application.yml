@@ -14,9 +14,12 @@ spring:
         dialect: "org.hibernate.dialect.PostgreSQLDialect"
     database-platform: "org.hibernate.dialect.PostgreSQLDialect"
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     generate-ddl: true
     show-sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog.sql
 
 server:
   port: 8084

@@ -11,8 +11,8 @@ COPY /build/libs/ /application/build/libs/
 #ADD build/libs/application-1.0.jar application.jar
 
 ENV APP_OPTS="\
-    -Xms512M -server -Xmx1024M -XX:+UseParallelGC -Djava.awt.headless=true"
-#    -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+    -Xms512M -server -Xmx1024M -XX:+UseParallelGC -Djava.awt.headless=true \
+    -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 
 CMD "$JAVA_HOME/bin/java" $APP_OPTS \
 -cp ./build/libs/application-1.0.jar \

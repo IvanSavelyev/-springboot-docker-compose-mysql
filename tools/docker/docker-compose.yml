@@ -28,5 +28,5 @@ services:
     volumes:
       - /data/app
     ports:
-#      - "5005:5005"
+      - "5005:5005"
       - "8084:8084"

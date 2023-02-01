@@ -1,4 +1,4 @@
-package com.example.springbootdockercomposemysql.controller;
+package com.example.springbootdockercomposemysql.web.controller.user;
 
 import com.example.springbootdockercomposemysql.entity.User;
 import com.example.springbootdockercomposemysql.repository.UserRepository;
