@@ -1,6 +1,6 @@
 CREATE TABLE USERS
 (
-    ID         SERIAL PRIMARY KEY,
+    ID         INTEGER  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     NAME       VARCHAR(256)                        NOT NULL,
     COUNTRY    VARCHAR(256)                        NOT NULL,
     EMAIL      VARCHAR(256)                        NOT NULL

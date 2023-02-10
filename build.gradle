@@ -75,13 +75,3 @@ tasks.register('killRmRmiAllContainersAndImages', Exec) {
                     '&& (docker rmi $(docker images -q) || true)'
 
 }
-
-tasks.register('psqlPortFree', Exec) {
-    group 'kill'
-    ignoreExitValue = true
-    def isWindows = System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')
-    def runningEnvironment = isWindows ? 'cmd' : 'bash'
-    def parameter = isWindows ? '/c' : '-c'
-
-    commandLine runningEnvironment, parameter, 'echo $Stairway3 | sudo -S  npx kill-port 5432'
-}

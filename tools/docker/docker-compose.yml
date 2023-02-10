@@ -18,7 +18,6 @@ services:
       retries: 1
 
   application:
-    image: application:1
     build:
       context: ../..
       dockerfile: ./tools/docker/application/Dockerfile

@@ -28,12 +28,14 @@ public class UserController {
 
   @GetMapping("/create")
   public List<User> users() {
-    User users = new User();
-    users.setId(1L);
-    users.setName("Sam");
-    users.setCountry("Development");
-    userRepository.save(users);
+    userRepository.save(new User(1L, "dsada", "dsada", "sdadasd"));
     return userRepository.findAll();
+    //    User users = new User();
+//    users.setId(1L);
+//    users.setName("Sam");
+//    users.setCountry("Development");
+//    userRepository.save(users);
+//    return userRepository.findAll();
   }
 
   @GetMapping("/users")
