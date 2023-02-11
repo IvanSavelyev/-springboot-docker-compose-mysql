@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

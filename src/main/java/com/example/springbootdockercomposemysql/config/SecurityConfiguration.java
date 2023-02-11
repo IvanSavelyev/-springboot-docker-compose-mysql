@@ -46,7 +46,7 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests()
-        .requestMatchers("/", "/v3/**", "/swagger-ui/**").permitAll()
+        .requestMatchers("/", "/v3/**", "/swagger-ui/**", "/actuator/health").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/profile").anonymous()
         .requestMatchers(HttpMethod.GET, "/api/profile").anonymous()
         .requestMatchers("/api/**").authenticated()

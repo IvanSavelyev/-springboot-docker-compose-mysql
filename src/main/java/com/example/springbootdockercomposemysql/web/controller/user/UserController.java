@@ -3,7 +3,10 @@ package com.example.springbootdockercomposemysql.web.controller.user;
 import com.example.springbootdockercomposemysql.entity.User;
 import com.example.springbootdockercomposemysql.repository.UserRepository;
 import java.util.List;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,15 +30,14 @@ public class UserController {
   }
 
   @GetMapping("/create")
+  @Transactional
   public List<User> users() {
-    userRepository.save(new User(1L, "dsada", "dsada", "sdadasd"));
+    var topByOrderByIdDesc = userRepository.findTopByOrderByIdDesc();
+    var user = topByOrderByIdDesc.orElseThrow(() -> new UsernameNotFoundException("so bad"));
+    String[] split = user.getEmail().split("@");
+    String email = split[0] + new Random().nextInt() + "@" + split[1];
+    userRepository.save(new User(null, "dsada", email, "sdadasd"));
     return userRepository.findAll();
-    //    User users = new User();
-//    users.setId(1L);
-//    users.setName("Sam");
-//    users.setCountry("Development");
-//    userRepository.save(users);
-//    return userRepository.findAll();
   }
 
   @GetMapping("/users")

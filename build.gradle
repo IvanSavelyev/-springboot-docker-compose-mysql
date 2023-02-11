@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springdocVersion"
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5-jakarta'
@@ -46,6 +47,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+    testImplementation "org.testcontainers:postgresql:1.17.6"
 }
 
 tasks.named('test') {
@@ -73,5 +77,16 @@ tasks.register('killRmRmiAllContainersAndImages', Exec) {
             '(docker kill $(docker ps -aq) || true) ' +
                     '&& (docker rm $(docker ps -aq) || true) ' +
                     '&& (docker rmi $(docker images -q) || true)'
+
+}
+
+tasks.register('cleanBuildWithoutTests', Exec) {
+    group 'build'
+    ignoreExitValue = true
+    def isWindows = System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')
+    def runningEnvironment = isWindows ? 'cmd' : 'bash'
+    def parameter = isWindows ? '/c' : '-c'
+
+    commandLine runningEnvironment, parameter, 'gradle clean build -x test'
 
 }

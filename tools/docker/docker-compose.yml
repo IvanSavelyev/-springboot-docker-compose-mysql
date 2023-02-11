@@ -29,3 +29,8 @@ services:
     ports:
       - "5005:5005"
       - "8084:8084"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "localhost:8084/actuator/health" ]
+      timeout: 5s
+      interval: 5s
+      retries: 3

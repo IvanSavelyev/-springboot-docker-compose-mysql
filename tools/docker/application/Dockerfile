@@ -1,9 +1,10 @@
+#FROM openjdk:17-alpine
 FROM openjdk:17.0.1-jdk-slim
 
-#RUN apt-get update
-#RUN apt-get install -y curl mc
+RUN apt-get update && \
+    apt-get install -y curl mc
 
-VOLUME /tmp
+#VOLUME /tmp
 
 WORKDIR /application
 COPY /build/libs/ /application/build/libs/

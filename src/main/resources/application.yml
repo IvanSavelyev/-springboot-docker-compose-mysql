@@ -23,3 +23,8 @@ spring:
 
 server:
   port: 8084
+
+management:
+  endpoint:
+    health:
+      show-details: always
